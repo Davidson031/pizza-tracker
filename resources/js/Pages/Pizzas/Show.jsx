@@ -5,11 +5,11 @@ import PizzaStatus from "@/Pages/Pizzas/Partials/PizzaStatus.jsx";
 
 export default function Show({ pizza }) {
 
-    useEffect(() => {
-        setInterval(() => {
-            router.reload({ only: ['pizza'] });
-        }, 3000);
-    }, []);
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         router.reload({ only: ['pizza'] });
+    //     }, 3000);
+    // }, []);
 
     return (
         <div className="max-w-3xl mx-auto py-12">

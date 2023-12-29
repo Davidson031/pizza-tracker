@@ -31,6 +31,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
+Route::get('/newOrder/{chef}', [PublicPizzaController::class, 'add'])->name('public.pizzas.add');
+Route::post('/newOrder', [PublicPizzaController::class, 'store'])->name('public.pizzas.store');
+
+
 Route::get('/order/{pizza}', [PublicPizzaController::class, 'show'])->name('public.pizzas.show');
 
 Route::middleware('auth')->group(function () {
@@ -42,5 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';
