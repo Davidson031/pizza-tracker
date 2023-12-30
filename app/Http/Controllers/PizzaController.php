@@ -11,9 +11,12 @@ class PizzaController extends Controller
 {
     //
 
-    public function index(): Response
+    public function index(Request $request)
     {
-        $pizzas = Pizza::all();
+
+        $userId = $request->user()->id;
+
+        $pizzas = Pizza::where('user_id', $userId)->get();
 
         return Inertia::render('Pizzas/All', [
             'pizzas' => $pizzas,
