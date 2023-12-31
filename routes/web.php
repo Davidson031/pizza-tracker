@@ -3,9 +3,12 @@
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicPizzaController;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +30,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+Route::get('/dashboard', function (Request $request) {
+
+    $userId = $request->user()->id;
+
+    $chef = User::find($userId);
+
+    $chef = new UserResource($chef);
+
+    return Inertia::render('Dashboard', [
+        "chef" => $chef
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -50,4 +62,4 @@ Route::middleware('auth')->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

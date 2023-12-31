@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class PublicPizzaController extends Controller
+class  PublicPizzaController extends Controller
 {
     //
     public function show(Pizza $pizza): Response
@@ -18,7 +18,6 @@ class PublicPizzaController extends Controller
             'pizza' => $pizza
         ]);
     }
-
 
     public function add($idChef)
     {
