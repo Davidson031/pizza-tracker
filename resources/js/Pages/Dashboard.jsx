@@ -9,18 +9,14 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 
 export default function Dashboard({ auth, chef }) {
 
-
-
-    // const { data, setData, post } = useForm({
-    //     size: '',
-    //     crust: '',
-    //     topping: '',
-    // });
-
     const [toppings, setToppings] = useState([]);
     const [crusts, setCrusts] = useState([]);
     const [sizes, setSizes] = useState([]);
+
+
     const [newTopping, setnewTopping] = useState('');
+    const [newCrust, setNewCrust] = useState('');
+    const [newSize, setNewSize] = useState('');
 
     useEffect(() => {
         setToppings(chef.data.toppings);
@@ -53,8 +49,18 @@ export default function Dashboard({ auth, chef }) {
     };
 
     const addTopping = () => {
-        setToppings([...toppings, {'topping' : newTopping}]);
+        setToppings([...toppings, { 'topping': newTopping }]);
         setnewTopping('')
+    };
+
+    const addCrust = () => {
+        setCrusts([...crusts, { 'crust': newCrust }]);
+        setNewCrust('')
+    };
+
+    const addSize = () => {
+        setSizes([...sizes, { 'size': newSize }]);
+        setNewSize('')
     };
 
 
@@ -78,7 +84,7 @@ export default function Dashboard({ auth, chef }) {
                                         <thead>
                                             <tr>
                                                 <th className=''>
-                                                    <input type="text" value={ newTopping } onChange={ (ev) => setnewTopping(ev.target.value)} className="focus:ring-indigo-500 mr-3 ml-2 mb-5 focus:border-indigo-500 shadow-sm  border-gray-300 rounded-md" />
+                                                    <input type="text" value={newTopping} onChange={(ev) => setnewTopping(ev.target.value)} className="focus:ring-indigo-500 mr-3 ml-2 mb-5 focus:border-indigo-500 shadow-sm  border-gray-300 rounded-md" />
                                                     <button type="button" className=" py-1 px-4 text-black" onClick={() => addTopping()}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 pt-1">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -109,6 +115,19 @@ export default function Dashboard({ auth, chef }) {
                                         <h2 className="tracking-wide text-2xl text-gray-900">Crusts</h2>
                                     </div>
                                     <table>
+                                        <thead>
+                                            <tr>
+                                                <th className=''>
+                                                    <input type="text" value={newCrust} onChange={(ev) => setNewCrust(ev.target.value)} className="focus:ring-indigo-500 mr-3 ml-2 mb-5 focus:border-indigo-500 shadow-sm  border-gray-300 rounded-md" />
+                                                    <button type="button" className=" py-1 px-4 text-black" onClick={() => addCrust()}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 pt-1">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                        </svg>
+
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
                                             {
                                                 crusts.map((crust, ind) => (
@@ -129,7 +148,19 @@ export default function Dashboard({ auth, chef }) {
                                             <h2 className="tracking-wide text-2xl text-gray-900">Sizes</h2>
                                         </div>
                                         <table>
-                                            {/* <TableBody charactersData={chef.data.crusts} removeCharacter={removeCharacter} /> */}
+                                            <thead>
+                                                <tr>
+                                                    <th className=''>
+                                                        <input type="text" value={newSize} onChange={(ev) => setNewSize(ev.target.value)} className="focus:ring-indigo-500 mr-3 ml-2 mb-5 focus:border-indigo-500 shadow-sm  border-gray-300 rounded-md" />
+                                                        <button type="button" className=" py-1 px-4 text-black" onClick={() => addSize()}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 pt-1">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                            </svg>
+
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
                                             <tbody>
                                                 {
                                                     sizes.map((size, ind) => (
