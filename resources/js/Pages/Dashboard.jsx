@@ -70,12 +70,12 @@ export default function Dashboard({ auth, chef }) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard" />
-
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                {/* <div className="max-w-7xl mx-auto sm:px-6 lg:px-8"> */}
+                <div className="sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6">
-                            <form onSubmit={submit} className="flex flex-col justify-center">
+                        <div className="p-6 ">
+                            <form onSubmit={submit} className="flex">
                                 <div className="container">
                                     <div className="flex items-center justify-center font-black m-3 mb-12">
                                         <h2 className="tracking-wide text-2xl text-gray-900">Toppings</h2>
