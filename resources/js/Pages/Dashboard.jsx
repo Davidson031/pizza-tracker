@@ -4,6 +4,8 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import SelectInput from "@/Components/SelectInput.jsx";
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { PlusIcon } from "@heroicons/react/24/outline";
+
 
 export default function Dashboard({ auth, chef }) {
 
@@ -18,6 +20,7 @@ export default function Dashboard({ auth, chef }) {
     const [toppings, setToppings] = useState([]);
     const [crusts, setCrusts] = useState([]);
     const [sizes, setSizes] = useState([]);
+    const [newTopping, setnewTopping] = useState('');
 
     useEffect(() => {
         setToppings(chef.data.toppings);
@@ -49,6 +52,11 @@ export default function Dashboard({ auth, chef }) {
         }));
     };
 
+    const addTopping = () => {
+        setToppings([...toppings, {'topping' : newTopping}]);
+        setnewTopping('')
+    };
+
 
     return (
         <AuthenticatedLayout
@@ -61,23 +69,36 @@ export default function Dashboard({ auth, chef }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6">
-
                             <form onSubmit={submit} className="flex flex-col justify-center">
                                 <div className="container">
                                     <div className="flex items-center justify-center font-black m-3 mb-12">
                                         <h2 className="tracking-wide text-2xl text-gray-900">Toppings</h2>
                                     </div>
                                     <table>
+                                        <thead>
+                                            <tr>
+                                                <th className=''>
+                                                    <input type="text" value={ newTopping } onChange={ (ev) => setnewTopping(ev.target.value)} className="focus:ring-indigo-500 mr-3 ml-2 mb-5 focus:border-indigo-500 shadow-sm  border-gray-300 rounded-md" />
+                                                    <button type="button" className=" py-1 px-4 text-black" onClick={() => addTopping()}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 pt-1">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                        </svg>
+
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                        {
-                                            toppings.map((topping, ind) => (
-                                                <tr key={ind}>
-                                                    <td className='pr-5 pl-3'>  *  </td>
-                                                    <td className='pr-5 pl-3'>{topping.topping}</td>
-                                                    <td><button onClick={() => removeTopping(ind)}> Delete </button></td>
-                                                </tr>
-                                            ))
-                                        }
+
+                                            {
+                                                toppings.map((topping, ind) => (
+                                                    <tr key={ind}>
+                                                        <td className='pr-5 pl-3'>  *  </td>
+                                                        <td className='pr-5 pl-3'>{topping.topping}</td>
+                                                        <td><button onClick={() => removeTopping(ind)}> Delete </button></td>
+                                                    </tr>
+                                                ))
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -110,16 +131,16 @@ export default function Dashboard({ auth, chef }) {
                                         <table>
                                             {/* <TableBody charactersData={chef.data.crusts} removeCharacter={removeCharacter} /> */}
                                             <tbody>
-                                            {
-                                                sizes.map((size, ind) => (
-                                                    <tr key={ind}>
-                                                        <td className='pr-5 pl-3'>  *  </td>
-                                                        <td className='pr-5 pl-3'>{size.size}</td>
-                                                        <td><button onClick={() => removeSize(ind)}> Delete </button></td>
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
+                                                {
+                                                    sizes.map((size, ind) => (
+                                                        <tr key={ind}>
+                                                            <td className='pr-5 pl-3'>  *  </td>
+                                                            <td className='pr-5 pl-3'>{size.size}</td>
+                                                            <td><button onClick={() => removeSize(ind)}> Delete </button></td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
